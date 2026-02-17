@@ -93,7 +93,7 @@ export default function FeedPage() {
     <main
       ref={scrollRef}
       onScroll={handleScroll}
-      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory bg-background no-scrollbar flex justify-center relative touch-none"
+      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory bg-background no-scrollbar flex justify-center relative touch-pan-y"
     >
       {/* Episodes Bottom Sheet Overlay */}
       {showEpisodes && (

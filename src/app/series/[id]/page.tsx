@@ -11,6 +11,7 @@ const SERIES_DATA: Record<string, any> = {
         tags: ['Drama', 'Crime', 'Trending'],
         rating: '4.8',
         views: '1.2M',
+        thumbnail: '/images/lagos-hustle.png',
         description: 'In the heart of Eko, Bisi’s struggle for the ultimate comeback begins. From the streets of Mushin to the penthouses of Victoria Island, witness the grit and glamour of West Africa’s biggest city.',
         episodes: [
             { id: 1, title: 'The Balogun Gambit', duration: '1:45', isLocked: false, thumbnail: '/images/lagos-hustle.png' },
@@ -19,6 +20,32 @@ const SERIES_DATA: Record<string, any> = {
             { id: 4, title: 'The P&P Deal', duration: '2:30', isLocked: true, thumbnail: '/images/lagos-hustle.png' },
             { id: 5, title: 'Lekki Lockdown', duration: '1:40', isLocked: true, thumbnail: '/images/lagos-hustle.png' },
             { id: 6, title: 'Final Hustle', duration: '3:00', isLocked: true, thumbnail: '/images/lagos-hustle.png' },
+        ]
+    },
+    'nkems-story': {
+        title: 'NKEM’S STORY',
+        tags: ['Romance', 'High Life', 'Society'],
+        rating: '4.9',
+        views: '2.5M',
+        thumbnail: '/images/nkems-story.png',
+        description: 'The secret revealed at the gala brunch makes everyone question their loyalty. Nkem must navigate the murky waters of Lagos high society to keep her family name clean.',
+        episodes: [
+            { id: 1, title: 'The Brunch Betrayal', duration: '2:15', isLocked: false, thumbnail: '/images/nkems-story.png' },
+            { id: 2, title: 'Society Secrets', duration: '1:50', isLocked: false, thumbnail: '/images/nkems-story.png' },
+            { id: 3, title: 'The High Life Price', duration: '2:05', isLocked: true, thumbnail: '/images/nkems-story.png' }
+        ]
+    },
+    'village-ceo': {
+        title: 'THE VILLAGE CEO',
+        tags: ['Comedy', 'Corporate', 'Culture'],
+        rating: '4.7',
+        views: '890K',
+        thumbnail: '/images/village-ceo.png',
+        description: 'Chief Kalu meets his match in the city, but the jungle rules still apply. A hilarious clash of traditions and modern business in the concrete jungle.',
+        episodes: [
+            { id: 1, title: 'Arrival in Eko', duration: '1:40', isLocked: false, thumbnail: '/images/village-ceo.png' },
+            { id: 2, title: 'Boardroom Battles', duration: '2:00', isLocked: false, thumbnail: '/images/village-ceo.png' },
+            { id: 3, title: 'Traditional KPIs', duration: '1:55', isLocked: true, thumbnail: '/images/village-ceo.png' }
         ]
     }
 };
@@ -29,7 +56,15 @@ export default function SeriesPage() {
     const series = SERIES_DATA[id] || SERIES_DATA['lagos-hustle'];
 
     return (
-        <div className="min-h-screen bg-background pb-32">
+        <div className="min-h-screen bg-background pb-32 relative">
+            {/* Mobile Back Button */}
+            <Link
+                href="/"
+                className="lg:hidden fixed top-8 left-8 z-50 w-12 h-12 bg-black/40 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/10 text-white shadow-2xl active:scale-90 transition-all"
+            >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+            </Link>
+
             {/* Cinematic Background Header */}
             <div className="relative w-full h-[50vh] lg:h-[60vh] overflow-hidden">
                 <Image
