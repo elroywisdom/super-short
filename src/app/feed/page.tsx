@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -46,7 +46,7 @@ const FEED_ITEMS = [
   },
 ];
 
-export default function FeedPage() {
+function FeedContent() {
   const [activeItem, setActiveItem] = useState(0);
   const [unlockedItems, setUnlockedItems] = useState<number[]>([]);
   const [showEpisodes, setShowEpisodes] = useState(false);
@@ -275,6 +275,18 @@ export default function FeedPage() {
         })}
       </div>
     </main>
+  );
+}
+
+export default function FeedPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen w-full bg-background flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <FeedContent />
+    </Suspense>
   );
 }
 
