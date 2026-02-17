@@ -29,7 +29,7 @@ export const EpisodeLock = ({ episodeNumber, onUnlock }: EpisodeLockProps) => {
                     </svg>
                 </div>
                 <h2 className="text-3xl font-bold mb-2">Episode {episodeNumber} is Locked</h2>
-                <p className="text-gray-400 mb-8 max-w-xs">Bridge the Netflix Gap. Unlock this episode for just $0.80 (₦600).</p>
+                <p className="text-gray-400 mb-8 max-w-xs">Unlock this episode for just $0.80 (₦600).</p>
                 <button
                     onClick={() => setShowDrawer(true)}
                     className="w-full bg-primary text-black font-black py-4 px-8 rounded-2xl shadow-[0_0_30px_rgba(0,255,136,0.3)] hover:scale-105 transition-all text-lg"
