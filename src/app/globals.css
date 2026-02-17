@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #080808;
+  --color-foreground: #ffffff;
+  --color-primary: #00FF88;
+  --color-onyx: #0A0A0A;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+
+  --radius-4xl: 32px;
+  --radius-5xl: 40px;
+}
+
+/* Custom Utilities for Scalability */
+@utility container-pill {
+  @apply max-w-[1400px] mx-auto px-4 lg:px-12 w-full;
+}
+
+@utility glass-morphism {
+  @apply bg-black/40 backdrop-blur-2xl border border-white/5;
+}
+
+@utility section-spacing {
+  @apply space-y-16 lg:space-y-24 py-12 lg:py-20;
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scrollbar refinement */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
