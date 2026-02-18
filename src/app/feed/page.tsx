@@ -234,7 +234,7 @@ function FeedContent() {
 
                 {/* Watch Full Drama Button - ONLY FOR TRAILERS */}
                 {isTrailer && (
-                  <div className="absolute bottom-24 left-0 w-full flex justify-center z-50 px-4 pointer-events-auto">
+                  <div className="absolute bottom-20 left-0 w-full flex justify-start z-50 px-6 pointer-events-auto">
                     <Link
                       href={`/series/${item.id}`}
                       onClick={(e) => e.stopPropagation()}

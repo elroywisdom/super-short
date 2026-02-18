@@ -58,8 +58,9 @@ export const CinematicTrailer = ({ image, video, isActive = true }: CinematicTra
                         src={video}
                         loop
                         muted
+                        preload="auto"
                         playsInline
-                        onPlay={() => setIsPlaying(true)}
+                        onPlaying={() => setIsPlaying(true)}
                         className="w-full h-full object-cover"
                     />
                 </div>
