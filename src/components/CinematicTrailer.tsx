@@ -5,14 +5,51 @@ import Image from 'next/image';
 
 interface CinematicTrailerProps {
     image: string;
+    video?: string;
     isActive?: boolean;
 }
 
-export const CinematicTrailer = ({ image, isActive = true }: CinematicTrailerProps) => {
+export const CinematicTrailer = ({ image, video, isActive = true }: CinematicTrailerProps) => {
+    const videoRef = React.useRef<HTMLVideoElement>(null);
+
+    React.useEffect(() => {
+        if (videoRef.current) {
+            if (isActive) {
+                const playPromise = videoRef.current.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay prevented:", error);
+                        // Fallback to muted if unmuted fails
+                        if (videoRef.current) {
+                            videoRef.current.muted = true;
+                            videoRef.current.play().catch(e => console.error("Muted autoplay failed", e));
+                        }
+                    });
+                }
+            } else {
+                videoRef.current.pause();
+                videoRef.current.currentTime = 0;
+            }
+        }
+    }, [isActive]);
+
     return (
         <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
-            {/* The Cinematic Frame with Ken Burns Effect */}
-            <div className={`relative w-full h-full transition-transform duration-[20000ms] ease-linear overflow-hidden ${isActive ? 'scale-110 translate-x-4' : 'scale-100'}`}>
+            {/* Video Layer (Priority) */}
+            {video && (
+                <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                    <video
+                        ref={videoRef}
+                        src={video}
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            )}
+
+            {/* The Cinematic Frame with Ken Burns Effect (Fallback / Background) */}
+            <div className={`relative w-full h-full transition-transform duration-[20000ms] ease-linear overflow-hidden ${isActive ? 'scale-110 translate-x-4' : 'scale-100'} ${video && isActive ? 'opacity-0' : 'opacity-100'}`}>
                 <Image
                     src={image}
                     alt="Cinematic Trailer"
@@ -27,10 +64,6 @@ export const CinematicTrailer = ({ image, isActive = true }: CinematicTrailerPro
 
             {/* Dynamic Light Leak / Glow */}
             <div className={`absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-purple-500/10 opacity-30 animate-pulse-slow pointer-events-none`} />
-
-            {/* Letterboxing (Cinematic Bars) */}
-            <div className="absolute top-0 left-0 right-0 h-[8%] bg-black z-10" />
-            <div className="absolute bottom-0 left-0 right-0 h-[8%] bg-black z-10" />
 
             {/* Vignette */}
             <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] pointer-events-none" />

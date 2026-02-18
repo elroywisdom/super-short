@@ -12,6 +12,7 @@ const SERIES_DATA: Record<string, any> = {
         rating: '4.8',
         views: '1.2M',
         thumbnail: '/images/lagos-hustle.png',
+        video: '/videos/lagos-hustle.mp4',
         description: 'In the heart of Eko, Bisi’s struggle for the ultimate comeback begins. From the streets of Mushin to the penthouses of Victoria Island, witness the grit and glamour of West Africa’s biggest city.',
         episodes: [
             { id: 1, title: 'The Balogun Gambit', duration: '1:45', isLocked: false, thumbnail: '/images/lagos-hustle.png' },
@@ -28,6 +29,7 @@ const SERIES_DATA: Record<string, any> = {
         rating: '4.9',
         views: '2.5M',
         thumbnail: '/images/nkems-story.png',
+        video: '/videos/nkems-story.mp4',
         description: 'The secret revealed at the gala brunch makes everyone question their loyalty. Nkem must navigate the murky waters of Lagos high society to keep her family name clean.',
         episodes: [
             { id: 1, title: 'The Brunch Betrayal', duration: '2:15', isLocked: false, thumbnail: '/images/nkems-story.png' },
@@ -41,6 +43,7 @@ const SERIES_DATA: Record<string, any> = {
         rating: '4.7',
         views: '890K',
         thumbnail: '/images/village-ceo.png',
+        video: '/videos/village-ceo.mp4',
         description: 'Chief Kalu meets his match in the city, but the jungle rules still apply. A hilarious clash of traditions and modern business in the concrete jungle.',
         episodes: [
             { id: 1, title: 'Arrival in Eko', duration: '1:40', isLocked: false, thumbnail: '/images/village-ceo.png' },
@@ -66,14 +69,33 @@ export default function SeriesPage() {
             </Link>
 
             {/* Cinematic Background Header */}
-            <div className="relative w-full h-[50vh] lg:h-[60vh] overflow-hidden">
-                <Image
-                    src={series.thumbnail || '/images/lagos-hustle.png'}
-                    alt={series.title}
-                    fill
-                    className="object-cover opacity-60"
-                    priority
-                />
+            <div className="relative w-full h-[50vh] lg:h-[60vh] overflow-hidden bg-black">
+                {series.video ? (
+                    <video
+                        src={series.video}
+                        autoPlay
+                        muted={false} // Attempt unmuted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover opacity-60"
+                        ref={(el) => {
+                            if (el) {
+                                el.play().catch(() => {
+                                    el.muted = true;
+                                    el.play().catch(e => console.error(e));
+                                });
+                            }
+                        }}
+                    />
+                ) : (
+                    <Image
+                        src={series.thumbnail || '/images/lagos-hustle.png'}
+                        alt={series.title}
+                        fill
+                        className="object-cover opacity-60"
+                        priority
+                    />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
 
                 <div className="absolute bottom-0 left-0 w-full p-8 lg:p-16 flex flex-col items-center lg:items-start text-center lg:text-left">

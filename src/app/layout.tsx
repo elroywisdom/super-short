@@ -11,8 +11,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://super-short.vercel.app'),
   title: "Super Shorts - African Microdrama Platform",
   description: "Bridging the Netflix Gap via sachet payments and premium vertical storytelling.",
+  openGraph: {
+    title: "Super Shorts - African Microdrama Platform",
+    description: "Bridging the Netflix Gap via sachet payments and premium vertical storytelling.",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 800,
+        height: 600,
+        alt: "Super Shorts Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Super Shorts - African Microdrama Platform",
+    description: "Bridging the Netflix Gap via sachet payments and premium vertical storytelling.",
+    images: ["/images/logo.png"],
+  },
 };
 
 export default function RootLayout({

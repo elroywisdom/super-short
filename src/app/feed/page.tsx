@@ -18,6 +18,7 @@ const FEED_ITEMS = [
     likes: '12.4K',
     comments: '432',
     image: '/images/lagos-hustle-trailer.png',
+    video: '/videos/lagos-hustle.mp4',
     isLocked: false,
   },
   {
@@ -30,6 +31,7 @@ const FEED_ITEMS = [
     likes: '24.1K',
     comments: '1.2K',
     image: '/images/nkems-story.png',
+    video: '/videos/nkems-story.mp4',
     isLocked: true,
   },
   {
@@ -42,6 +44,7 @@ const FEED_ITEMS = [
     likes: '8.9K',
     comments: '156',
     image: '/images/village-ceo.png',
+    video: '/videos/village-ceo.mp4',
     isLocked: false,
   },
 ];
@@ -163,6 +166,7 @@ function FeedContent() {
               {/* Cinematic Trailer (Simulated Video) */}
               <CinematicTrailer
                 image={item.image}
+                video={(item as any).video}
                 isActive={activeItem === idx}
               />
 
@@ -226,16 +230,20 @@ function FeedContent() {
               </div>
 
               {/* Bottom Info Overlay */}
-              <div className={`absolute bottom-0 w-full p-6 pb-26 z-20 transition-all duration-500 ${(controlsVisible || isTrailer) ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
+              <div className={`absolute bottom-0 w-full p-6 pb-32 z-20 transition-all duration-500 ${(controlsVisible || isTrailer) ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
 
                 {/* Watch Full Drama Button - ONLY FOR TRAILERS */}
                 {isTrailer && (
-                  <Link href={`/series/${item.id}`} onClick={(e) => e.stopPropagation()} className="block w-full mb-6 relative z-50">
-                    <div className="bg-primary/20 backdrop-blur-xl border border-primary/30 rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-primary/30 transition-all active:scale-95 shadow-[0_0_30px_rgba(0,255,136,0.2)]">
-                      <span className="text-sm font-black text-primary italic uppercase tracking-widest">Watch Full Drama</span>
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </div>
-                  </Link>
+                  <div className="absolute bottom-24 left-0 w-full flex justify-center z-50 px-4 pointer-events-auto">
+                    <Link
+                      href={`/series/${item.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="group flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/10 px-6 py-3 rounded-full hover:bg-black/80 transition-all active:scale-95"
+                    >
+                      <span className="text-xs font-bold text-white uppercase tracking-wider">Watch Full Drama</span>
+                      <svg className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </Link>
+                  </div>
                 )}
 
                 <div className="flex items-center gap-3 mb-4">
