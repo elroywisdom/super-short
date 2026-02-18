@@ -115,9 +115,13 @@ export default function SeriesPage() {
 
                     <div className="mt-12 bg-white/5 border border-white/10 rounded-[32px] p-8">
                         <h4 className="font-black italic uppercase text-primary mb-4 text-sm tracking-widest">PRODUCER NOTE</h4>
-                        <p className="text-sm text-gray-300 italic leading-relaxed">
-                            "Lagos Hustle is strictly shot on 12K cameras to bring the most immersive experience to your phone. Unlock all episodes for just ₦200."
+                        <p className="text-sm text-gray-300 italic leading-relaxed mb-4">
+                            "Lagos Hustle is strictly shot on 12K cameras to bring the most immersive experience to your phone."
                         </p>
+                        <button className="w-full bg-primary text-black font-black py-4 rounded-xl shadow-[0_0_20px_rgba(0,255,136,0.3)] hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" /></svg>
+                            UNLOCK ALL EPISODES FOR ₦200
+                        </button>
                     </div>
                 </div>
 

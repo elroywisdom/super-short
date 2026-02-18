@@ -28,7 +28,7 @@ export default function Home() {
           <button className="w-11 h-11 bg-white/5 rounded-full flex items-center justify-center border border-white/10 text-white active:scale-95 transition-all">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </button>
-          <Link href="/profile" className="w-11 h-11 bg-primary rounded-full flex items-center justify-center text-black font-black text-xs shadow-lg shadow-primary/20 active:scale-95 transition-all">JD</Link>
+          <Link href="/profile" className="w-11 h-11 bg-primary rounded-full flex items-center justify-center text-black font-black text-xs shadow-lg shadow-primary/20 active:scale-95 transition-all">EW</Link>
         </div>
       </header>
 
@@ -48,13 +48,13 @@ export default function Home() {
 
           <div className="flex items-center gap-5 border-l border-white/10 pl-8 h-12">
             <div className="text-right">
-              <p className="font-bold text-sm text-white leading-none mb-1.5 uppercase tracking-tight">John Doe</p>
+              <p className="font-bold text-sm text-white leading-none mb-1.5 uppercase tracking-tight">El-Roy Wisdom</p>
               <div className="flex items-center gap-1 justify-end">
                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
                 <p className="text-[9px] text-primary font-black uppercase tracking-widest">Premium</p>
               </div>
             </div>
-            <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center text-black font-black text-sm shadow-lg shadow-primary/20 cursor-pointer hover:rotate-3 transition-transform">JD</div>
+            <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center text-black font-black text-sm shadow-lg shadow-primary/20 cursor-pointer hover:rotate-3 transition-transform">EW</div>
           </div>
         </div>
       </div>

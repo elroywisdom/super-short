@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useSachetPay, PaymentMethod } from '@/hooks/useSachetPay';
+import { MembershipSelection, PlanType } from './MembershipSelection';
 
 interface EpisodeLockProps {
     episodeNumber: number;
@@ -10,15 +11,30 @@ interface EpisodeLockProps {
 
 export const EpisodeLock = ({ episodeNumber, onUnlock }: EpisodeLockProps) => {
     const [showDrawer, setShowDrawer] = useState(false);
+    const [showMembership, setShowMembership] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState<PlanType>('MONTHLY');
     const { paySachet, isPaying } = useSachetPay();
 
     const handlePayment = async (method: PaymentMethod) => {
-        const result = await paySachet(method, 0.80);
+        // Calculate price based on selected plan (mock logic for now)
+        let price = 0.80;
+        if (selectedPlan === 'DAILY') price = 1000 / 750; // Approx conversion or just use Naira directly in hook if supported
+        if (selectedPlan === 'MONTHLY') price = 2500 / 750;
+        if (selectedPlan === 'DIASPORA') price = 5.00;
+        if (selectedPlan === 'SINGLE') price = 600 / 750;
+
+        const result = await paySachet(method, price);
         if (result.success) {
             onUnlock();
             setShowDrawer(false);
         }
     };
+
+    const handlePlanSelect = (plan: PlanType) => {
+        setSelectedPlan(plan);
+        setShowMembership(false);
+        setShowDrawer(true);
+    }
 
     return (
         <>
@@ -29,21 +45,32 @@ export const EpisodeLock = ({ episodeNumber, onUnlock }: EpisodeLockProps) => {
                     </svg>
                 </div>
                 <h2 className="text-3xl font-bold mb-2">Episode {episodeNumber} is Locked</h2>
-                <p className="text-gray-400 mb-8 max-w-xs">Unlock this episode for just $0.80 (₦600).</p>
+                <p className="text-gray-400 mb-8 max-w-xs">Unlock this episode for just ₦600.</p>
                 <button
-                    onClick={() => setShowDrawer(true)}
+                    onClick={() => setShowMembership(true)}
                     className="w-full bg-primary text-black font-black py-4 px-8 rounded-2xl shadow-[0_0_30px_rgba(0,255,136,0.3)] hover:scale-105 transition-all text-lg"
                 >
                     One-Tap Sachet Pay
                 </button>
             </div>
 
+            <MembershipSelection
+                isOpen={showMembership}
+                onClose={() => setShowMembership(false)}
+                onSelectPlan={handlePlanSelect}
+            />
+
             {showDrawer && (
                 <div className="fixed inset-0 bg-black/90 z-50 flex items-end">
                     <div className="w-full bg-onyx border-t border-white/10 rounded-t-[32px] p-8 pb-12 animate-slide-up">
                         <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-8" />
                         <h3 className="text-2xl font-bold mb-2">Sachet Payment</h3>
-                        <p className="text-gray-400 mb-8">Select your preferred local payment method</p>
+                        <p className="text-gray-400 mb-8">
+                            {selectedPlan === 'DAILY' && 'Paying ₦1,000 for Daily Pass'}
+                            {selectedPlan === 'MONTHLY' && 'Paying ₦2,500 for Monthly VIP'}
+                            {selectedPlan === 'DIASPORA' && 'Paying $5.00 for Diaspora Premium'}
+                            {selectedPlan === 'SINGLE' && 'Paying ₦600 for Single Episode'}
+                        </p>
 
                         <div className="grid grid-cols-1 gap-4">
                             {[

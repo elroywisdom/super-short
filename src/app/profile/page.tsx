@@ -24,13 +24,13 @@ export default function ProfilePage() {
                 <div className="flex flex-col lg:flex-row items-center lg:items-end gap-8 mb-16 px-4 lg:px-0">
                     <div className="relative group">
                         <div className="w-32 h-32 lg:w-40 lg:h-40 bg-primary rounded-[40px] flex items-center justify-center text-5xl font-black text-black shadow-2xl shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">
-                            JD
+                            EW
                         </div>
                         <div className="absolute -bottom-2 -right-2 bg-white text-black text-[10px] font-black px-4 py-1.5 rounded-full shadow-xl">PRO</div>
                     </div>
 
                     <div className="text-center lg:text-left flex-1">
-                        <h1 className="text-4xl lg:text-6xl font-black italic uppercase italic tracking-tighter text-white">JOHN <span className="text-primary italic">DOE</span></h1>
+                        <h1 className="text-4xl lg:text-6xl font-black italic uppercase italic tracking-tighter text-white">EL-ROY <span className="text-primary italic">WISDOM</span></h1>
                         <p className="text-gray-400 font-bold uppercase tracking-widest text-xs mt-2">Member since Feb 2024 • Lagos, Nigeria</p>
 
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-8">
