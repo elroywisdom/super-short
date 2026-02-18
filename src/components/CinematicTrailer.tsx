@@ -11,24 +11,39 @@ interface CinematicTrailerProps {
 
 export const CinematicTrailer = ({ image, video, isActive = true }: CinematicTrailerProps) => {
     const videoRef = React.useRef<HTMLVideoElement>(null);
+    const [isPlaying, setIsPlaying] = React.useState(false);
 
     React.useEffect(() => {
         if (videoRef.current) {
             if (isActive) {
+                // Reset isPlaying when active changes
+                setIsPlaying(false);
+
+                // Force muted on mobile/initial attempt for better success rate
+                videoRef.current.muted = true;
+
                 const playPromise = videoRef.current.play();
                 if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Autoplay prevented:", error);
-                        // Fallback to muted if unmuted fails
-                        if (videoRef.current) {
-                            videoRef.current.muted = true;
-                            videoRef.current.play().catch(e => console.error("Muted autoplay failed", e));
-                        }
-                    });
+                    playPromise
+                        .then(() => {
+                            // Video started playing successfully
+                            setIsPlaying(true);
+                        })
+                        .catch(error => {
+                            console.log("Autoplay prevented:", error);
+                            // Fallback to muted if unmuted fails (though we start muted now)
+                            if (videoRef.current) {
+                                videoRef.current.muted = true;
+                                videoRef.current.play()
+                                    .then(() => setIsPlaying(true))
+                                    .catch(e => console.error("Muted autoplay failed", e));
+                            }
+                        });
                 }
             } else {
                 videoRef.current.pause();
                 videoRef.current.currentTime = 0;
+                setIsPlaying(false);
             }
         }
     }, [isActive]);
@@ -42,14 +57,17 @@ export const CinematicTrailer = ({ image, video, isActive = true }: CinematicTra
                         ref={videoRef}
                         src={video}
                         loop
+                        muted
                         playsInline
+                        onPlay={() => setIsPlaying(true)}
                         className="w-full h-full object-cover"
                     />
                 </div>
             )}
 
             {/* The Cinematic Frame with Ken Burns Effect (Fallback / Background) */}
-            <div className={`relative w-full h-full transition-transform duration-[20000ms] ease-linear overflow-hidden ${isActive ? 'scale-110 translate-x-4' : 'scale-100'} ${video && isActive ? 'opacity-0' : 'opacity-100'}`}>
+            {/* Only fade out if video is actually playing */}
+            <div className={`relative w-full h-full transition-transform duration-[20000ms] ease-linear overflow-hidden ${isActive ? 'scale-110 translate-x-4' : 'scale-100'} ${video && isPlaying && isActive ? 'opacity-0' : 'opacity-100'}`}>
                 <Image
                     src={image}
                     alt="Cinematic Trailer"
