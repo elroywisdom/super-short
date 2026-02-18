@@ -30,7 +30,7 @@ export default function OnboardingPage() {
 
             <div className="relative z-10 pt-12 text-center mb-12">
                 <div className="flex justify-center mb-6">
-                    <Image src="/images/logo.png" alt="Logo" width={48} height={48} className="rounded-xl shadow-2xl" />
+                    <Image src="/images/Shorts Logo transparent.png" alt="Logo" width={48} height={48} className="rounded-xl shadow-2xl" />
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-black italic uppercase italic tracking-tighter text-white mb-4">
                     CHOOSE YOUR <span className="text-primary italic">VIBE</span>

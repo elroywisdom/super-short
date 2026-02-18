@@ -29,6 +29,7 @@ export const SeriesCarousel = ({ title, items }: SeriesCarouselProps) => {
                         title={item.title}
                         tag={item.tag}
                         image={item.image}
+                        video={item.video}
                     />
                 ))}
             </div>

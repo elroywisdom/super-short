@@ -9,20 +9,57 @@ interface SeriesCardProps {
     title: string;
     tag?: string;
     image: string;
+    video?: string;
     episodes?: string;
     isFeatured?: boolean;
 }
 
-export const SeriesCard = ({ id, title, tag, image, episodes, isFeatured }: SeriesCardProps) => {
+export const SeriesCard = ({ id, title, tag, image, video, episodes, isFeatured }: SeriesCardProps) => {
+    const videoRef = React.useRef<HTMLVideoElement>(null);
+
+    const handleMouseEnter = () => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(error => {
+                console.log("Video play failed:", error);
+            });
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+        }
+    };
+
     return (
-        <Link href={`/series/${id}`} className={`flex-shrink-0 group cursor-pointer ${isFeatured ? 'w-56 lg:w-72' : 'w-44 lg:w-60'}`}>
-            <div className="relative aspect-[9/14] rounded-4xl overflow-hidden mb-4 border border-white/5 transition-all duration-500 group-hover:scale-[1.04] group-hover:border-primary/40 shadow-2xl">
+        <Link
+            href={`/series/${id}`}
+            className={`flex-shrink-0 group cursor-pointer ${isFeatured ? 'w-56 lg:w-72' : 'w-44 lg:w-60'}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+            <div className="relative aspect-[9/14] rounded-4xl overflow-hidden mb-4 border border-white/5 transition-all duration-500 group-hover:scale-[1.04] group-hover:border-primary/40 shadow-2xl bg-black">
+
+                {/* Video Layer */}
+                {video && (
+                    <video
+                        ref={videoRef}
+                        src={video}
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+                    />
+                )}
+
+                {/* Image Poster (Fallback & Default) */}
                 <Image
                     src={image}
                     alt={title}
                     fill
                     sizes="(max-width: 768px) 176px, 240px"
-                    className="object-cover"
+                    className={`object-cover transition-opacity duration-500 ${video ? 'group-hover:opacity-0' : ''}`}
                 />
 
                 {tag && (
@@ -31,7 +68,7 @@ export const SeriesCard = ({ id, title, tag, image, episodes, isFeatured }: Seri
                     </div>
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-5 z-10">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-5 z-20">
                     <button className="w-full bg-white text-black font-black py-3 rounded-2xl text-[10px] lg:text-xs uppercase tracking-widest translate-y-2 group-hover:translate-y-0 transition-transform shadow-xl">
                         Play Now
                     </button>

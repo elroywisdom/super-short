@@ -22,7 +22,7 @@ export const Sidebar = () => {
             <Link href="/" className="mb-8 block">
                 <div className="flex items-center gap-3">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/Shorts Logo transparent.png"
                         alt="Super Shorts"
                         width={44}
                         height={44}

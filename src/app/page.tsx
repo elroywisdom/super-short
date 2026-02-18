@@ -7,9 +7,9 @@ import { Hero } from '@/components/Hero';
 import { SeriesCarousel } from '@/components/SeriesCarousel';
 
 const series = [
-  { id: 'lagos-hustle', title: 'Lagos Hustle', subtitle: 'LAGOS', tag: 'Trending', image: '/images/lagos-hustle.png', description: "One man's struggle for the ultimate comeback in West Africa's biggest city." },
-  { id: 'nkems-story', title: 'Nkem’s Story', subtitle: 'NKEM’S', tag: 'New Episode', image: '/images/nkems-story.png' },
-  { id: 'village-ceo', title: 'The Village CEO', subtitle: 'VILLAGE', tag: 'Original', image: '/images/village-ceo.png' },
+  { id: 'lagos-hustle', title: 'Lagos Hustle', subtitle: 'LAGOS', tag: 'Trending', image: '/images/lagos-hustle.png', video: '/videos/lagos-hustle.mp4', description: "One man's struggle for the ultimate comeback in West Africa's biggest city." },
+  { id: 'nkems-story', title: 'Nkem’s Story', subtitle: 'NKEM’S', tag: 'New Episode', image: '/images/nkems-story.png', video: '/videos/nkems-story.mp4' },
+  { id: 'village-ceo', title: 'The Village CEO', subtitle: 'VILLAGE', tag: 'Original', image: '/images/village-ceo.png', video: '/videos/village-ceo.mp4' },
 ];
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
       {/* Mobile Floating Header */}
       <header className="fixed top-6 left-6 right-6 lg:hidden z-50 glass-morphism p-5 rounded-3xl flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 pl-1">
-          <Image src="/images/logo.png" alt="Super Shorts" width={28} height={28} className="rounded-lg shadow-[0_0_15px_rgba(0,255,136,0.3)]" />
+          <Image src="/images/Shorts Logo transparent.png" alt="Super Shorts" width={28} height={28} className="rounded-lg shadow-[0_0_15px_rgba(0,255,136,0.3)]" />
           <span className="text-xl font-black italic tracking-tighter uppercase text-white">SUPER</span>
         </div>
         <div className="flex gap-3">
